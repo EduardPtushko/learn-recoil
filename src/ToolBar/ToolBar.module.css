@@ -1,0 +1,20 @@
+.VStack {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	background-color: white;
+	padding: 0.5rem;
+	box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+}
+
+.VStack button {
+	background-color: #edf1f7;
+	border: 0;
+	border-radius: 5px;
+	transition: all 0.3s;
+	cursor: pointer;
+}
+.VStack button:hover {
+	background-color: #dfe4ee;
+}

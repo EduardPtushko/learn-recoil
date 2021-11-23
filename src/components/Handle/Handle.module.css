@@ -1,0 +1,5 @@
+.Box {
+	position: absolute;
+	transition: 0.1s border-color ease-in-out;
+	background-color: white;
+}
