@@ -1,0 +1,76 @@
+.cardWrapper {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	background-color: white;
+	padding: 8px;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+	border-radius: 8px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.sectionWrapper {
+	display: flex;
+	align-items: flex-start;
+	flex-direction: column;
+}
+
+.sectionWrapper p {
+	font-weight: 500;
+	margin: 0;
+}
+
+.property {
+	margin-top: 0.5rem;
+	width: 210px;
+}
+
+.propertyLabel {
+	font-size: 14px;
+	font-weight: 500;
+	margin-bottom: 8px;
+}
+
+.propertyNumberInput {
+	background-color: #e2e8f0;
+	display: flex;
+	align-items: center;
+	position: relative;
+	width: 100%;
+	z-index: 0;
+	border-radius: 8px;
+}
+
+.propertyInput {
+	width: 100%;
+	min-width: 0px;
+	outline: 2px solid transparent;
+	outline-offset: 2px;
+	position: relative;
+	appearance: none;
+	font-size: 1rem;
+	height: 32px;
+	border-radius: 8px;
+	vertical-align: top;
+	border: 2px solid;
+	border-color: transparent;
+	background: #edf2f7;
+	padding-left: 0.75rem;
+}
+
+.propertyRightElement {
+	right: 0;
+	width: 32px;
+	height: 32px;
+	font-size: 12px;
+	position: absolute;
+	top: 0px;
+	z-index: 2;
+	pointer-events: none;
+	line-height: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

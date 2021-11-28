@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { useSetRecoilState } from 'recoil'
-import { elementsState, selectedElementState } from '../Canvas/Canvas'
+import { elementsState } from '../Canvas/Canvas'
 import SquareIcon from '../Icons/SquareIcon'
 import styles from './ToolBar.module.css'
 

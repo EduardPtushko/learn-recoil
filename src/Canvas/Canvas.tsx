@@ -2,6 +2,7 @@ import React, { createContext, useState } from 'react'
 import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import Rectangle from '../components/Rectangle'
 import { Element } from '../components/Rectangle/Rectangle'
+import EditProperties from '../EditProperties'
 import PageContainer from '../PageContainer'
 import ToolBar from '../ToolBar'
 
@@ -28,6 +29,7 @@ const Canvas: React.FC = () => {
 			}}
 		>
 			<ToolBar />
+			<EditProperties />
 			{elements.map((id) => (
 				<Rectangle key={id} id={id} />
 			))}
