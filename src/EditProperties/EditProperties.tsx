@@ -1,91 +1,49 @@
-import { atom, selector, useRecoilState } from 'recoil'
+import { selector, selectorFamily, useRecoilState, useRecoilValue } from 'recoil'
 import { Card } from './Card'
 import { Property } from './Property'
 import { Section } from './Section'
-import { Element, elementState } from '../components/Rectangle/Rectangle'
+import { elementState } from '../components/Rectangle/Rectangle'
 import { selectedElementState } from '../Canvas/Canvas'
+import { get as _get, set as _set } from 'lodash'
+import produce from 'immer'
 
-export const selectedElementProperties = selector<Element | undefined>({
-	key: 'selectedElementProperty',
-	get: ({ get }) => {
-		const selectedElementId = get(selectedElementState)
+export const editPropertiesState = selectorFamily<number, { path: string; id: number }>({
+	key: 'editProperties',
+	get:
+		({ path, id }) =>
+		({ get }) => {
+			const element = get(elementState(id))
 
-		if (selectedElementId === null) return
+			return _get(element, path)
+		},
 
-		return get(elementState(selectedElementId))
-	},
-	set: ({ get, set }, newValue) => {
-		const selectedElementId = get(selectedElementState)
-		if (selectedElementId === null) return
-		if (!newValue) return
+	set:
+		({ path, id }) =>
+		({ get, set }, newValue) => {
+			const element = get(elementState(id))
 
-		set(elementState(selectedElementId), newValue)
-	},
+			const newElement = produce(element, (draft) => {
+				_set(draft, path, newValue)
+			})
+
+			set(elementState(id), newElement)
+		},
 })
 
 export const EditProperties = () => {
-	const [element, setElement] = useRecoilState(selectedElementProperties)
+	const selectedElement = useRecoilValue(selectedElementState)
 
-	if (!element) return null
-
-	const setPosition = (property: 'top' | 'left', value: number) => {
-		setElement({
-			...element,
-			style: {
-				...element.style,
-				position: {
-					...element.style.position,
-					[property]: value,
-				},
-			},
-		})
-	}
-	const setSize = (property: 'width' | 'height', value: number) => {
-		setElement({
-			...element,
-			style: {
-				...element.style,
-				size: {
-					...element.style.size,
-					[property]: value,
-				},
-			},
-		})
-	}
+	if (selectedElement === null) return null
 
 	return (
 		<Card>
 			<Section heading="Position">
-				<Property
-					label="Top"
-					value={element.style.position.top}
-					onChange={(top) => {
-						setPosition('top', top)
-					}}
-				/>
-				<Property
-					label="Left"
-					value={element.style.position.left}
-					onChange={(left) => {
-						setPosition('left', left)
-					}}
-				/>
+				<Property label="Top" path="style.position.top" id={selectedElement} />
+				<Property label="Left" path="style.position.left" id={selectedElement} />
 			</Section>
 			<Section heading="Size">
-				<Property
-					label="Width"
-					value={element.style.size.width}
-					onChange={(width) => {
-						setSize('width', width)
-					}}
-				/>
-				<Property
-					label="Height"
-					value={element.style.size.height}
-					onChange={(height) => {
-						setSize('height', height)
-					}}
-				/>
+				<Property label="Width" path="style.size.width" id={selectedElement} />
+				<Property label="Height" path="style.size.height" id={selectedElement} />
 			</Section>
 		</Card>
 	)

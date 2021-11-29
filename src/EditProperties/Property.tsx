@@ -1,14 +1,12 @@
+import { useRecoilState } from 'recoil'
+import { editPropertiesState } from './EditProperties'
 import styles from './EditProperties.module.css'
 
-export const Property = ({
-	label,
-	value,
-	onChange,
-}: {
-	label: string
-	value: number
-	onChange: (value: number) => void
-}) => {
+export const Property = ({ label, path, id }: { label: string; path: string; id: number }) => {
+	const [value, setValue] = useRecoilState(editPropertiesState({ path, id }))
+
+	if (value === null) return null
+
 	return (
 		<div className={styles.property}>
 			<p className={styles.propertyLabel}>{label}</p>
@@ -21,7 +19,7 @@ export const Property = ({
 					autoCorrect="off"
 					className={styles.propertyInput}
 					value={value}
-					onChange={(e) => onChange(parseFloat(e.target.value))}
+					onChange={(e) => setValue(parseFloat(e.target.value))}
 				/>
 
 				<div className={styles.propertyRightElement}>px</div>
