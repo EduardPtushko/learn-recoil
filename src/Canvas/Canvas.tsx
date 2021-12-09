@@ -1,4 +1,3 @@
-import React, { createContext, useState } from 'react'
 import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import Rectangle from '../components/Rectangle'
 import { Element } from '../components/Rectangle/Rectangle'
@@ -33,6 +32,14 @@ const Canvas: React.FC = () => {
 			{elements.map((id) => (
 				<Rectangle key={id} id={id} />
 			))}
+
+			<div
+				style={{
+					position: 'absolute',
+					top: '50%',
+					left: '50%',
+				}}
+			></div>
 		</PageContainer>
 	)
 }

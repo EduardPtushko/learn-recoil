@@ -7,7 +7,7 @@ import { selectedElementState } from '../Canvas/Canvas'
 import { get as _get, set as _set } from 'lodash'
 import produce from 'immer'
 
-export const editPropertiesState = selectorFamily<number, { path: string; id: number }>({
+export const editPropertiesState = selectorFamily<any, { path: string; id: number }>({
 	key: 'editProperties',
 	get:
 		({ path, id }) =>

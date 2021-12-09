@@ -1,0 +1,26 @@
+.DualRing {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	width: var(--size);
+	height: var(--size);
+}
+
+.DualRing:after {
+	content: ' ';
+	display: block;
+	width: calc(var(--size) - 6px);
+	height: calc(var(--size) - 6px);
+	border-radius: 50%;
+	border: var(--thickness) solid var(--color);
+	border-color: var(--color) transparent var(--color) transparent;
+	animation: dual-ring 1.2s linear infinite;
+}
+@keyframes dual-ring {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
